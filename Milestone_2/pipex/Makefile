@@ -6,7 +6,7 @@
 #    By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/16 18:43:58 by yoherfan          #+#    #+#              #
-#    Updated: 2025/02/25 17:33:35 by yoherfan         ###   ########.fr        #
+#    Updated: 2025/03/13 16:40:17 by yoherfan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,14 +16,14 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -g
 
-SRC = pipex.c
+SRC = pipex.c pipex_split.c pipex_utils.c
 
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	$(CC) $(OBJ) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
