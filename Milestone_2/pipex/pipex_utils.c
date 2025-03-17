@@ -6,7 +6,7 @@
 /*   By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:12:02 by yoherfan          #+#    #+#             */
-/*   Updated: 2025/03/13 16:43:11 by yoherfan         ###   ########.fr       */
+/*   Updated: 2025/03/17 18:20:25 by yoherfan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,12 @@ int	ft_strlen(const char *s)
 	while (s[i] != '\0')
 		i++;
 	return (i);
+}
+
+void ft_clean(int file_in, int file_out, int *fd)
+{
+	close (file_in);
+	close (file_out);
+	close (fd[0]);
+	close (fd[1]);
 }

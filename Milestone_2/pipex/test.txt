@@ -1,3 +1,4 @@
-ciao
-palazzo
 barca
+gatto
+arco
+È arcobaleno

@@ -6,7 +6,7 @@
 /*   By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:30:10 by yoherfan          #+#    #+#             */
-/*   Updated: 2025/03/13 18:24:56 by yoherfan         ###   ########.fr       */
+/*   Updated: 2025/03/17 18:23:11 by yoherfan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void ft_execute(char *cmd, char** env)
 	char **splitted_cmd;
 	char **splitted_paths;
 	char	*path;
-	char 	*temp;
 	int		index;
 	int		i;
 
@@ -36,14 +35,12 @@ void ft_execute(char *cmd, char** env)
 	i = -1;
 	while (splitted_paths[++i] != NULL)
 	{
-		temp = ft_strjoin(splitted_paths[i], "/");
-		path = ft_strjoin(temp, cmd);
-		printf("%d", access(path, F_OK));
-		printf("%s\n", path);
+		path = ft_strjoin(splitted_paths[i], "/");
+		path = ft_strjoin(path, splitted_cmd[0]);
 		if (access(path, F_OK) == 0)
-			execve(path, splitted_cmd, env);		
+			execve(path, splitted_cmd, env);			
 	}
-	execve(cmd, splitted_cmd, env);
+	execve(splitted_cmd[0], splitted_cmd, env);
 }
 
 int	main(int argc, char **argv, char **env)
@@ -58,83 +55,33 @@ int	main(int argc, char **argv, char **env)
 	i = 1;
 	file_in = open(argv[1], O_RDONLY);
 	file_out = open(argv[argc - 1], O_WRONLY | O_TRUNC);
-	
 	dup2(file_in, 0);
-
-	(void) env;
-	if (pipe(fd) == -1)
-		exit(0);
 	while (++i < argc - 1)
 	{
+		if (pipe(fd) == -1)
+			exit(0);
 		id = fork();
-		if (i == 2 && id == 0)
+		if (i < argc - 2 && id == 0) //dal primo al penultimo comando
 		{
-			// dup2(fd[1], 1);
+			dup2(fd[1], 1);
+			ft_clean(file_in, file_out, fd);
 			ft_execute(argv[i], env);
 			exit(0);
 		}
-		else if (i == 3 && id == 0)
+		else if (i == argc - 2 && id == 0) //ultimo comando
 		{
-			// dup2(file_out, 1);
+			dup2(file_out, 1);
+			ft_clean(file_in, file_out, fd);
 			ft_execute(argv[i], env);
 			exit(0);
 		}
-		else
+		else //processo padre
 		{
+			wait(NULL);
 			close(fd[1]);
 			dup2(fd[0], 0);
+			close(fd[0]);
 		}
 	}
+	ft_clean(file_in, file_out, fd);
 }
-
-// int	main(int argc, char **argv, char **env)
-// {
-//     int fd[2];
-// 	int file_in;
-// 	int	file_out;
-//     int i;
-//     int id;
-
-//     i = 1;
-// 	id = 1;
-// 	file_in = open(argv[1], O_RDONLY);
-// 	file_out = open(argv[argc - 1], O_WRONLY);
-	
-// 	if (pipe(fd) == -1)
-// 		exit(0);
-// 	dup2(file_in, 0);
-// 	dup2(fd[1], 1);
-// 	close(file_in);
-//     while (++i < argc - 2)
-//     {
-// 		id = fork();
-// 		close(fd[0]);
-// 		close(fd[1]);
-// 		close(file_out);
-
-//         if (id == 0) //sono nel ramo dei figli
-// 		{
-// 			if (i == 2) //sono nel primo figlio
-// 			{
-// 				close(fd[0]);
-// 				close(fd[1]);
-// 				close(file_out);			
-// 			}
-// 			else if (i == argc - 3) //sono nell'ultimo figlio
-// 			{
-// 				dup2(file_out, 1);
-// 				...
-// 				close(fd[0]);
-// 				close(fd[1]);
-// 				close(file_out);
-// 			}
-// 			else //sono in un figlio centrale
-// 			{
-// 				dup2(fd[0], 0);
-// 				close(fd[0]);
-// 				close(fd[1]);
-// 				close(file_out);
-// 			}
-// 		}
-//     }
-// }
