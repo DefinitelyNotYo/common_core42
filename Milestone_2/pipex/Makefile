@@ -6,7 +6,7 @@
 #    By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/16 18:43:58 by yoherfan          #+#    #+#              #
-#    Updated: 2025/03/13 16:40:17 by yoherfan         ###   ########.fr        #
+#    Updated: 2025/03/18 16:45:16 by yoherfan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -g
 
-SRC = pipex.c pipex_split.c pipex_utils.c
+SRC = get_next_line_utils.c get_next_line.c \
+	  pipex_clean.c pipex_manager.c pipex.c pipex_split.c pipex_utils.c
 
 OBJ = $(SRC:.c=.o)
 

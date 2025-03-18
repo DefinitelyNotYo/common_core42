@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils.c                                      :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/13 15:12:02 by yoherfan          #+#    #+#             */
-/*   Updated: 2025/03/18 16:19:18 by yoherfan         ###   ########.fr       */
+/*   Created: 2025/01/03 15:35:44 by yoherfan          #+#    #+#             */
+/*   Updated: 2025/03/18 16:47:48 by yoherfan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin_g(char *s1, char *s2)
 {
 	char	*str;
 	int		i;
@@ -20,7 +20,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	i = -1;
 	j = ft_strlen((char *)s1) + ft_strlen((char *)s2);
-	str = malloc(sizeof(char) * j + 1);
+	str = ft_calloc(j + 1, 1);
 	while (++i < j + 1)
 		((unsigned char *)str)[i] = '\0';
 	if (!str)
@@ -33,38 +33,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	while (s2[i] != '\0')
 		str[j++] = s2[i++];
 	str[j] = '\0';
+	free(s1);
 	return (str);
 }
 
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
-{
-	size_t	i;
-
-	i = 0;
-	while (i < n)
-	{
-		if (s1[i] != s2[i])
-			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
-		i++;
-	}
-	return (0);
-}
-
-void	*ft_calloc(size_t nmemb, size_t size)
-{
-	void	*pointer;
-	size_t	i;
-
-	pointer = malloc(nmemb * size);
-	if (!pointer)
-		return (NULL);
-	i = -1;
-	while (++i < nmemb * size)
-		((unsigned char *)pointer)[i] = '\0';
-	return (pointer);
-}
-
-int	ft_strlen(const char *s)
+int	ft_strlen_g(char *s)
 {
 	int	i;
 
@@ -74,3 +47,35 @@ int	ft_strlen(const char *s)
 	return (i);
 }
 
+int	check_newline(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '\n')
+		{
+			return (1);
+		}
+		i++;
+	}
+	return (0);
+}
+
+char	*ft_strdup(char *s)
+{
+	char	*str;
+	int		len;
+	int		i;
+
+	len = ft_strlen((char *)s);
+	i = -1;
+	str = (char *)malloc(sizeof(char) * len + 1);
+	if (!str)
+		return (NULL);
+	while (s[++i] != '\0')
+		str[i] = s[i];
+	str[i] = '\0';
+	return (str);
+}

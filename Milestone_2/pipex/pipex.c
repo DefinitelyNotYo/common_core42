@@ -6,26 +6,26 @@
 /*   By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:30:10 by yoherfan          #+#    #+#             */
-/*   Updated: 2025/03/17 18:23:11 by yoherfan         ###   ########.fr       */
+/*   Updated: 2025/03/18 19:16:20 by yoherfan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-//env non viene contato negli argomenti
-//il numero di comandi e' uguale ad argc - 3 (che sono il nome dell'eseguibile e i due file)
-//sto dando per assunto che il secondo file, quello di output, esiste
+//SIGNAL 13 SIGPIPE, DA RISOLVERE?
 
 void ft_execute(char *cmd, char** env)
 {
 	char **splitted_cmd;
 	char **splitted_paths;
 	char	*path;
+	char	*temp;
 	int		index;
 	int		i;
 
 	splitted_cmd = ft_split(cmd, ' ');
 	i = -1;
+	path = NULL;
 	while (env[++i] != NULL)
 	{
 		if (ft_strncmp(env[i], "PATH=", 5) == 0)
@@ -35,53 +35,46 @@ void ft_execute(char *cmd, char** env)
 	i = -1;
 	while (splitted_paths[++i] != NULL)
 	{
-		path = ft_strjoin(splitted_paths[i], "/");
-		path = ft_strjoin(path, splitted_cmd[0]);
+		if (path != NULL)
+			free (path);
+		temp = ft_strjoin(splitted_paths[i], "/");
+		path = ft_strjoin(temp, splitted_cmd[0]);
+		if (temp)
+			free (temp);
 		if (access(path, F_OK) == 0)
-			execve(path, splitted_cmd, env);			
+			execve(path, splitted_cmd, env);
 	}
-	execve(splitted_cmd[0], splitted_cmd, env);
+	if (access(splitted_cmd[0], F_OK) == 0)
+		execve(splitted_cmd[0], splitted_cmd, env);
+	ft_free_matrix(splitted_cmd, 0);
+	ft_free_matrix(splitted_paths, 0);
+	free(path);
 }
 
 int	main(int argc, char **argv, char **env)
 {
-    int fd[2];
-	int file_in;
-	int	file_out;
-    int id;
+	int	files[2];
 	int	i;
 	
-	id = 1;
 	i = 1;
-	file_in = open(argv[1], O_RDONLY);
-	file_out = open(argv[argc - 1], O_WRONLY | O_TRUNC);
-	dup2(file_in, 0);
-	while (++i < argc - 1)
+	files[0] = open(argv[1], O_RDONLY);
+	files[1] = open(argv[argc - 1], O_WRONLY | O_TRUNC | O_CREAT, 0777);
+	printf("\n\n%d\n\n", files[0]);
+	printf("\n\n%d\n\n", files[1]);
+	if (ft_check_args(files[0], files[1], argc) == 0)
 	{
-		if (pipe(fd) == -1)
-			exit(0);
-		id = fork();
-		if (i < argc - 2 && id == 0) //dal primo al penultimo comando
-		{
-			dup2(fd[1], 1);
-			ft_clean(file_in, file_out, fd);
-			ft_execute(argv[i], env);
-			exit(0);
-		}
-		else if (i == argc - 2 && id == 0) //ultimo comando
-		{
-			dup2(file_out, 1);
-			ft_clean(file_in, file_out, fd);
-			ft_execute(argv[i], env);
-			exit(0);
-		}
-		else //processo padre
-		{
-			wait(NULL);
-			close(fd[1]);
-			dup2(fd[0], 0);
-			close(fd[0]);
-		}
+		ft_fast_clean(files[0], files[1]);
+		return (0);		
 	}
-	ft_clean(file_in, file_out, fd);
+	dup2(files[0], 0);
+	ft_manager(argc, files, argv, env);
+	return (0);
+}
+
+int	ft_check_args(int file_in, int file_out, int argc)
+{
+	if (argc == 5 && file_in != -1 && file_out != -1)
+		return (1);		
+	write(1, "Error: invalid args\n", 20);
+	return (0);
 }
