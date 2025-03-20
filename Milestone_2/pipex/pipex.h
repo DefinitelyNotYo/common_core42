@@ -6,7 +6,7 @@
 /*   By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:31:00 by yoherfan          #+#    #+#             */
-/*   Updated: 2025/03/18 18:11:54 by yoherfan         ###   ########.fr       */
+/*   Updated: 2025/03/20 17:50:19 by yoherfan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,15 @@
 #  define BUFFER_SIZE 1025
 # endif
 
+typedef struct s_pathfinder{
+    char **splitted_cmd;
+	char **splitted_paths;
+	char	*path;
+	char	*temp;
+	int		index;
+	int		i;
+} t_pathfinder;
+
 char	*get_next_line(int fd);
 char	*find_scrap(char *str);
 char	*find_line(char *str);
@@ -37,6 +46,7 @@ int		check_newline(char *str);
 
 void    ft_clean(int file_in, int file_out, int *fd);
 void    ft_fast_clean(int file_in, int file_out);
+void	ft_free_mem(char **matrix_1, char **matrix_2, char *str);
 
 void    ft_main_process_exe(int *fd);
 void    ft_cmd_exe(int *files, int *fd, char *cmd, char **env);
@@ -54,3 +64,5 @@ int     ft_strncmp(const char *s1, const char *s2, size_t n);
 
 void    ft_execute(char *cmd, char** env);
 int     ft_check_args(int file_in, int files_out, int argc);
+int     ft_check_last_exe(char *cmd, char** env);
+int     ft_check_last(int argc, char **argv, char **env);

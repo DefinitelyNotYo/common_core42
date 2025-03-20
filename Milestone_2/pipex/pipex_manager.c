@@ -6,7 +6,7 @@
 /*   By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 16:27:49 by yoherfan          #+#    #+#             */
-/*   Updated: 2025/03/18 18:57:19 by yoherfan         ###   ########.fr       */
+/*   Updated: 2025/03/20 17:33:29 by yoherfan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,29 @@
 
 void ft_main_process_exe(int *fd)
 {
-    close(fd[1]);
     dup2(fd[0], 0);
-    close(fd[0]); 
+    close(fd[0]);
+    close(fd[1]);
 }
 
 void ft_cmd_exe(int *files, int *fd, char *cmd, char **env)
 {
     dup2(fd[1], 1);
-    ft_clean(files[0], files[1], fd);
-    ft_execute(cmd, env);
-    exit(0);    
+    close (fd[0]);
+	close (fd[1]);
+    close (files[0]);
+	close (files[1]);
+    ft_execute(cmd, env); 
 }
 
 void ft_last_cmd_exe(int *files, int *fd, char *cmd, char **env)
 {
     dup2(files[1], 1);
-    ft_clean(files[0], files[1], fd);
+    close (fd[0]);
+	close (fd[1]);
+    close (files[0]);
+	close (files[1]);
     ft_execute(cmd, env);
-    exit(0);  
 }
 
 void ft_manager(int argc, int *files, char **argv, char **env)

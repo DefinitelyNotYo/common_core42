@@ -1,0 +1,13 @@
+get_next_line.c
+get_next_line_utils.c
+Makefile
+pipex
+pipex.c
+pipex_clean.c
+pipex.h
+pipex_manager.c
+pipex_split.c
+pipex_utils.c
+result.txt
+supp.supp
+test.txt
