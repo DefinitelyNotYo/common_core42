@@ -6,7 +6,7 @@
 /*   By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/18 16:18:22 by yoherfan          #+#    #+#             */
-/*   Updated: 2025/03/20 16:02:06 by yoherfan         ###   ########.fr       */
+/*   Updated: 2025/03/21 15:54:40 by yoherfan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,28 @@ void	ft_clean(int file_in, int file_out, int *fd)
 
 void	ft_fast_clean(int file_in, int file_out)
 {
-    close (file_in);
+	close (file_in);
 	close (file_out);
-    exit(0);
+	exit(0);
 }
 
-void	ft_free_memory(char **matrix_1, char **matrix_2, char *str)
+void	ft_free_mem(char **mat_1, char **mat_2, char *str, t_pathfinder *p)
 {
-	ft_free_matrix(matrix_1, 0);
-	ft_free_matrix(matrix_2, 0);
+	ft_free_matrix(mat_1, 0);
+	ft_free_matrix(mat_2, 0);
 	free(str);
+	free(p);
+}
+
+void	ft_free_memfd(t_pathfinder *p, int *files, int toggle)
+{
+	ft_free_matrix(p->split_cmd, 0);
+	ft_free_matrix(p->split_paths, 0);
+	free(p->path);
+	free(p);
+	if (toggle == 1)
+	{
+		close(files[0]);
+		close(files[1]);
+	}
 }

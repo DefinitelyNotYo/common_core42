@@ -6,7 +6,7 @@
 /*   By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:12:55 by yoherfan          #+#    #+#             */
-/*   Updated: 2025/03/18 18:48:03 by yoherfan         ###   ########.fr       */
+/*   Updated: 2025/03/21 13:45:32 by yoherfan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	ft_free_matrix(char **matrix, int i)
 	}
 	free (matrix);
 }
-
 
 int	ft_next_delim_index(const char *s, char c)
 {

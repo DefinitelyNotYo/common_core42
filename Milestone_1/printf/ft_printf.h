@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lhima <lhima@student.42.fr>                +#+  +:+       +#+        */
+/*   By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:53:16 by yoherfan          #+#    #+#             */
-/*   Updated: 2025/01/02 15:36:57 by lhima            ###   ########.fr       */
+/*   Updated: 2025/05/14 17:06:25 by yoherfan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 
 int	ft_putchar_fd(char c, int fd);
 int	ft_putstr_fd(char *s, int fd, int toggle);
-int	ft_putnbr(int n, int fd, int len, int toggle);
+int	ft_putnbr(int n, int fd);
 int	ft_putaddress(void *address);
 
 int	ft_printf(const char *r_key, ...);

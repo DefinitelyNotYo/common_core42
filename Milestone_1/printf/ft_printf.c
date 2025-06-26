@@ -6,7 +6,7 @@
 /*   By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/12 14:51:30 by yoherfan          #+#    #+#             */
-/*   Updated: 2025/01/02 15:46:34 by yoherfan         ###   ########.fr       */
+/*   Updated: 2025/05/14 17:31:06 by yoherfan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@ int	ft_printf_check(int i, va_list ls, const char *r_key)
 	else if (r_key[i] == '%' && r_key[i + 1] == 's')
 		len += ft_putstr_fd(va_arg(ls, char *), 1, 0);
 	else if (r_key[i] == '%' && r_key[i + 1] == 'd')
-		len += ft_putnbr(va_arg(ls, int), 1, 0, 0);
+		len += ft_putnbr(va_arg(ls, int), 1);
 	else if (r_key[i] == '%' && r_key[i + 1] == 'i')
-		len += ft_putnbr(va_arg(ls, int), 1, 0, 0);
+		len += ft_putnbr(va_arg(ls, int), 1);
 	else if (r_key[i] == '%' && r_key[i + 1] == '%')
 		len += ft_putchar_fd('%', 1);
 	else if (r_key[i] == '%' && r_key[i + 1] == 'u')
@@ -91,10 +91,8 @@ int	check_base(char *base)
 
 int	ft_putnbr_exe(unsigned long nbr, char *base, int len)
 {
-	if (nbr == 0 && nbr % ft_putstr_fd(base, 1, 1) == 0)
-	{
+	if (nbr == 0)
 		return (0);
-	}
 	else
 	{
 		len += ft_putnbr_exe(nbr / ft_putstr_fd(base, 1, 1), base, len);
@@ -106,14 +104,8 @@ int	ft_putnbr_exe(unsigned long nbr, char *base, int len)
 
 int	ft_putnbr_base(unsigned long x, char *base, int len)
 {
-	if ((int)check_base(base) == 1)
+	if (check_base(base) == 1)
 	{
-		if (x < 0)
-		{
-			write(1, "-", 1);
-			len++;
-			x = x * (-1);
-		}
 		if (x == 0)
 		{
 			write(1, &base[0], 1);
@@ -127,59 +119,59 @@ int	ft_putnbr_base(unsigned long x, char *base, int len)
 	}
 	return (len);
 }
-// int main()
-// {
-// 	char *address = "ciao";
+int main()
+{
+	char *address = "ciao";
 
-// 	ft_printf("\n----- TEST SENZA FLAG -----\n\n");
+	ft_printf("\n----- TEST SENZA FLAG -----\n\n");
 
-// 	printf("printf:    ");
-// 	printf("prova\n");
-// 	ft_printf("ft_printf: ");
-// 	ft_printf("prova");
+	printf("printf:    ");
+	printf("prova\n");
+	ft_printf("ft_printf: ");
+	ft_printf("prova");
 
-// 	ft_printf("\n\n----- TEST %%c -----\n\n");
+	ft_printf("\n\n----- TEST %%c -----\n\n");
 
-// 	printf("printf:    %c\n", 'c');
-// 	ft_printf("ft_printf: %c", 'c');
+	printf("printf:    %c\n", 'c');
+	ft_printf("ft_printf: %c", 'c');
 
-// 	ft_printf("\n\n----- TEST %%s -----\n\n");
+	ft_printf("\n\n----- TEST %%s -----\n\n");
 
-// 	printf("printf:    %s\n", "stringa");
-// 	ft_printf("ft_printf: %s", "stringa");
+	printf("printf:    %s\n", "stringa");
+	ft_printf("ft_printf: %s", "stringa");
 
-// 	ft_printf("\n\n----- TEST %%d -----\n\n");
+	ft_printf("\n\n----- TEST %%d -----\n\n");
 
-// 	printf("printf:    %d\n", 42);
-// 	ft_printf("ft_printf: %d", 42);
+	printf("printf:    %d\n", -42);
+	ft_printf("ft_printf: %d", -42);
 
-// 	ft_printf("\n\n----- TEST %%i -----\n\n");
+	ft_printf("\n\n----- TEST %%i -----\n\n");
 
-// 	printf("printf:    %i\n", 42);
-// 	ft_printf("ft_printf: %i", 42);
+	printf("printf:    %i\n", 42);
+	ft_printf("ft_printf: %i", 42);
 
-// 	ft_printf("\n\n----- TEST %% -----\n\n");
+	ft_printf("\n\n----- TEST %% -----\n\n");
 
-// 	printf("printf:    %%\n");
-// 	ft_printf("ft_printf: %%");
+	printf("printf:    %%\n");
+	ft_printf("ft_printf: %%");
 
-// 	ft_printf("\n\n----- TEST %%p -----\n\n");
+	ft_printf("\n\n----- TEST %%p -----\n\n");
 
-// 	printf("printf:    %p\n", address);
-// 	ft_printf("ft_printf: %p", address);
+	printf("printf:    %p\n", address);
+	ft_printf("ft_printf: %p", address);
 
-// 	ft_printf("\n\n----- TEST %%u -----\n\n");
+	ft_printf("\n\n----- TEST %%u -----\n\n");
 
-// 	printf("printf:    %u\n", -1);
-// 	ft_printf("ft_printf: %u", -1);
+	printf("printf:    %u\n", -1);
+	ft_printf("ft_printf: %u", -1);
 
-// 	ft_printf("\n\n----- TEST %%x -----\n\n");
+	ft_printf("\n\n----- TEST %%x -----\n\n");
 
-// 	printf("printf:    %x\n", -1);
-// 	ft_printf("ft_printf: %x", -1);
+	printf("printf:    %x\n", -12);
+	ft_printf("ft_printf: %x", -12);
 
-// 	ft_printf("\n\n----- TEST %%X -----\n\n");
+	ft_printf("\n\n----- TEST %%X -----\n\n");
 
-// 	printf("printf:    %X\n", -1);
-// 	ft_printf("ft_printf: %X", -1);
-// }
+	printf("printf:    %X\n", -1);
+	ft_printf("ft_printf: %X", -1);
+}

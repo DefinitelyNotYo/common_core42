@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cciapett <cciapett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 15:33:18 by yoherfan          #+#    #+#             */
-/*   Updated: 2024/12/04 16:37:40 by yoherfan         ###   ########.fr       */
+/*   Updated: 2025/04/16 12:37:57 by cciapett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 	i = -1;
 	j = ft_strlen((char *)s1) + ft_strlen((char *)s2);
-	str = malloc(sizeof(char) * j + 1);
+	str = ft_calloc(j + 1, sizeof(char));
 	while (++i < j + 1)
 		((unsigned char *)str)[i] = '\0';
 	if (!str)

@@ -6,7 +6,7 @@
 /*   By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/13 15:12:02 by yoherfan          #+#    #+#             */
-/*   Updated: 2025/03/18 16:19:18 by yoherfan         ###   ########.fr       */
+/*   Updated: 2025/03/21 15:00:55 by yoherfan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,3 +74,9 @@ int	ft_strlen(const char *s)
 	return (i);
 }
 
+void	ft_jolly_p(t_pathfinder *p, char *cmd)
+{
+	p->split_cmd = ft_split(cmd, ' ');
+	p->i = -1;
+	p->path = NULL;
+}

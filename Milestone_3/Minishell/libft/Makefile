@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+         #
+#    By: cciapett <cciapett@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/29 14:05:49 by yoherfan          #+#    #+#              #
-#    Updated: 2024/12/10 15:57:18 by yoherfan         ###   ########.fr        #
+#    Updated: 2025/04/09 18:20:09 by cciapett         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
     ft_toupper.c
 
 BONUS = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c ft_lstadd_back.c \
-        ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
+        ft_lstdelone.c ft_lstclear.c ft_lstiter.c
 
 OBJ = $(SRC:.c=.o)
 
