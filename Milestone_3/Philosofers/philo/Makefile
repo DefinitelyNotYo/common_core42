@@ -6,17 +6,17 @@
 #    By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/25 14:35:52 by yoherfan          #+#    #+#              #
-#    Updated: 2025/06/26 16:46:06 by yoherfan         ###   ########.fr        #
+#    Updated: 2025/07/03 15:06:35 by yoherfan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = philosofers
+NAME = philo
 
 CC = cc
 
 CFLAGS = -Wall -Wextra -Werror -g -pthread
 
-SRC = actions.c clean.c messages.c parsing.c philosofers.c setup.c utils.c \
+SRC = actions.c case_1.c clean.c messages.c mutex.c parsing.c philosofers.c setup.c utils.c \
 	wrap.c
 
 OBJ = $(SRC:.c=.o)

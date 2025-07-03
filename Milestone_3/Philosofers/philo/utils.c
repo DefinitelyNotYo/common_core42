@@ -6,7 +6,7 @@
 /*   By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:49:58 by yoherfan          #+#    #+#             */
-/*   Updated: 2025/06/26 16:06:18 by yoherfan         ###   ########.fr       */
+/*   Updated: 2025/07/03 17:18:13 by yoherfan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,24 @@ long long	get_time_stamp()
 	long long		time_stamp;
 
 	gettimeofday(&time, NULL);
-	time_stamp = time.tv_sec * 1000 + time.tv_usec / 1000;
+	time_stamp = time.tv_sec * 1000L + time.tv_usec / 1000L;
+	usleep(50);
 	return (time_stamp);
+}
+
+int	check_meals(t_table *table)
+{
+	int	i;
+
+	i = -1;
+	while (++i < table->n_philos)
+	{
+		pthread_mutex_lock(table->philosofers[i].mute_max_meals);
+		if (table->philosofers[i].rules->number_of_times_each_philosopher_must_eat == -1)
+			return (pthread_mutex_unlock(table->philosofers[i].mute_max_meals), 0);
+		if (table->philosofers[i].meals == table->philosofers[i].rules->number_of_times_each_philosopher_must_eat)
+			return (pthread_mutex_unlock(table->philosofers[i].mute_max_meals), 0);
+		pthread_mutex_unlock(table->philosofers[i].mute_max_meals);
+	}
+	return (1);
 }

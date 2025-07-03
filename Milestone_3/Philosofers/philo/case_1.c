@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   clean.c                                            :+:      :+:    :+:   */
+/*   case_1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/26 16:45:46 by yoherfan          #+#    #+#             */
-/*   Updated: 2025/07/03 17:56:58 by yoherfan         ###   ########.fr       */
+/*   Created: 2025/07/03 15:05:59 by yoherfan          #+#    #+#             */
+/*   Updated: 2025/07/03 15:09:01 by yoherfan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosofers.h"
 
-void	clean_memory(t_table *table)
+void	actions_one(t_philosofer *philo)
 {
-	pthread_mutex_destroy(table->forks);
-	pthread_mutex_destroy(table->mute_alive);
-	pthread_mutex_destroy(table->mute_last_meal);
-	pthread_mutex_destroy(table->mute_max_meals);
-	free (table->everybody_lives);
-	free (table->philosofers);
-	free (table->threads);
-	free (table->forks);
-	free (table->mute_alive);
-	free (table->mute_last_meal);
-	free (table->mute_max_meals);
-	free (table->death);
+	pthread_mutex_lock(philo->mute_alive);
+	if (*philo->everybody_lives == 0)
+		return (pthread_mutex_unlock(philo->mute_alive), (void)0);
+	pthread_mutex_unlock(philo->mute_alive);
+	pthread_mutex_lock(philo->fork_dx);
+	send_message(philo, 1); //philo has taken a fork
+	pthread_mutex_unlock(philo->fork_dx);
 }

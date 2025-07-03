@@ -6,7 +6,7 @@
 /*   By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:36:28 by yoherfan          #+#    #+#             */
-/*   Updated: 2025/06/26 17:19:10 by yoherfan         ###   ########.fr       */
+/*   Updated: 2025/07/03 17:45:26 by yoherfan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,17 @@ typedef struct s_rules
 typedef struct s_philosofer
 {
 	int	id;
+	
 	pthread_mutex_t	*fork_dx;
 	pthread_mutex_t	*fork_sx;
-	pthread_mutex_t	mute_last_meal;
+	pthread_mutex_t	*mute_last_meal;
+	pthread_mutex_t	*mute_alive;
+	pthread_mutex_t *mute_max_meals;
+	
+	int				meals;
 	long long		last_meal_start;
-	int				run;
-	long long		*clock;
+	int				*everybody_lives;
+	long long		clock;
 	t_rules			*rules;
 }	t_philosofer;
 
@@ -56,9 +61,14 @@ typedef struct s_table
 	long long		clock;
 	t_philosofer 	*philosofers;
 	pthread_t		*threads;
-	pthread_mutex_t *forks;
 	pthread_t		*death;
-	int				everybody_lives;
+	int				*everybody_lives;
+
+	pthread_mutex_t *forks;
+	pthread_mutex_t	*mute_alive;
+	pthread_mutex_t	*mute_last_meal;
+	pthread_mutex_t	*mute_max_meals;
+	
 }	t_table;
 
 //ACTIONS.C
@@ -67,8 +77,14 @@ void		monitor(t_table *table);
 void		ft_eat(t_philosofer *philo);
 void		ft_sleep(t_philosofer *philo);
 void		ft_think(t_philosofer *philo);
+//CASE_1.C
+void		actions_one(t_philosofer *philo);
+//CLEAN.C
+void		clean_memory(t_table *table);
 //MESSAGES.C
 void		send_message(t_philosofer *philo, int flag);
+//MUTEX.C
+void		init_mutex(t_table *table);
 //PARSING.C
 int			parse_inputs(int argc, char **argv);
 int			contains_not_numbers(char *str);
@@ -82,6 +98,7 @@ void		set_philosofers(t_table *table, t_rules *rules);
 void		ft_putnbr(long long n, int fd);
 long long	ft_atoll(char *nptr);
 long long	get_time_stamp();
+int			check_meals(t_table *table);
 //WRAP.C
 void		*safe_malloc(size_t size);
 

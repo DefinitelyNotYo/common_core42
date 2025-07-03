@@ -6,7 +6,7 @@
 /*   By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 14:36:26 by yoherfan          #+#    #+#             */
-/*   Updated: 2025/06/26 15:53:12 by yoherfan         ###   ########.fr       */
+/*   Updated: 2025/07/03 17:46:40 by yoherfan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(int argc, char **argv)
 	if (parse_inputs(argc, argv) == -1)
 		return (0);
 	setup_table(&table, &rules, argc, argv);
+	clean_memory(&table);
 }
 
 	// (void)argc;
