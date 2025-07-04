@@ -6,7 +6,7 @@
 /*   By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/26 16:45:46 by yoherfan          #+#    #+#             */
-/*   Updated: 2025/07/03 17:56:58 by yoherfan         ###   ########.fr       */
+/*   Updated: 2025/07/04 14:57:27 by yoherfan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	clean_memory(t_table *table)
 	pthread_mutex_destroy(table->mute_last_meal);
 	pthread_mutex_destroy(table->mute_max_meals);
 	free (table->everybody_lives);
-	free (table->philosofers);
+	free (table->philos);
 	free (table->threads);
 	free (table->forks);
 	free (table->mute_alive);

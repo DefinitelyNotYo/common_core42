@@ -6,7 +6,7 @@
 /*   By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:49:58 by yoherfan          #+#    #+#             */
-/*   Updated: 2025/07/03 17:18:13 by yoherfan         ###   ########.fr       */
+/*   Updated: 2025/07/04 18:34:23 by yoherfan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,13 @@ long long	ft_atoll(char *nptr)
 		return (result);
 }
 
-long long	get_time_stamp()
+long long	get_time_stamp(void)
 {
 	struct timeval	time;
 	long long		time_stamp;
 
 	gettimeofday(&time, NULL);
 	time_stamp = time.tv_sec * 1000L + time.tv_usec / 1000L;
-	usleep(50);
 	return (time_stamp);
 }
 
@@ -68,12 +67,12 @@ int	check_meals(t_table *table)
 	i = -1;
 	while (++i < table->n_philos)
 	{
-		pthread_mutex_lock(table->philosofers[i].mute_max_meals);
-		if (table->philosofers[i].rules->number_of_times_each_philosopher_must_eat == -1)
-			return (pthread_mutex_unlock(table->philosofers[i].mute_max_meals), 0);
-		if (table->philosofers[i].meals == table->philosofers[i].rules->number_of_times_each_philosopher_must_eat)
-			return (pthread_mutex_unlock(table->philosofers[i].mute_max_meals), 0);
-		pthread_mutex_unlock(table->philosofers[i].mute_max_meals);
+		pthread_mutex_lock(table->philos[i].mute_max_meals);
+		if (table->philos[i].rules->notepme == -1)
+			return (pthread_mutex_unlock(table->philos[i].mute_max_meals), 0);
+		if (table->philos[i].meals == table->philos[i].rules->notepme)
+			return (pthread_mutex_unlock(table->philos[i].mute_max_meals), 0);
+		pthread_mutex_unlock(table->philos[i].mute_max_meals);
 	}
 	return (1);
 }

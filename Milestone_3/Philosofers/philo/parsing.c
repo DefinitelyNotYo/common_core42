@@ -6,7 +6,7 @@
 /*   By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 17:22:47 by yoherfan          #+#    #+#             */
-/*   Updated: 2025/06/25 17:58:35 by yoherfan         ###   ########.fr       */
+/*   Updated: 2025/07/04 18:48:07 by yoherfan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ int	parse_inputs(int argc, char **argv)
 	int	i;
 
 	i = 0;
-	while (++i < argc)
-		if (contains_not_numbers(argv[i]) == -1)
-			return (printf("Invalid arguments\n"), -1);
 	if (argc < 5 || argc > 6)
 		return (printf("Invalid number of arguments\n"), -1);
+	while (++i < argc)
+		if (contains_not_numbers(argv[i]) == -1 || argv[i][0] == '\0')
+			return (printf("Invalid arguments\n"), -1);
 	if (ft_atoll(argv[1]) < 1)
 		return (printf("Invalid number of philosofers\n"), -1);
 	if (ft_atoll(argv[2]) < 0 || ft_atoll(argv[3]) < 0 || \
@@ -36,7 +36,7 @@ int	parse_inputs(int argc, char **argv)
 int	contains_not_numbers(char *str)
 {
 	int	i;
-	
+
 	i = 0;
 	while (str[i] != '\0')
 	{
