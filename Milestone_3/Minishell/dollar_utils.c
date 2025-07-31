@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dollar_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cciapett <cciapett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/16 12:19:47 by cciapett          #+#    #+#             */
-/*   Updated: 2025/06/23 14:24:03 by yoherfan         ###   ########.fr       */
+/*   Updated: 2025/06/05 18:49:05 by cciapett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	ft_copy_number(char **str, char *nbr, int *j)
 }
 
 void	ft_init_doll(char **str, char **str_itoa, t_parameters *p, char **temp)
-{
+{	
 	*str_itoa = ft_itoa(p->dollar);
 	*temp = ft_strdup((*str));
 	if (*str != NULL)

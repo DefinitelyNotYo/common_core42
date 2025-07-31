@@ -6,7 +6,7 @@
 /*   By: cciapett <cciapett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 13:42:54 by cciapett          #+#    #+#             */
-/*   Updated: 2025/06/23 16:02:37 by cciapett         ###   ########.fr       */
+/*   Updated: 2025/06/13 16:48:31 by cciapett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,11 @@ int	ft_check_export(char *str, t_parameters *p)
 {
 	char	*str_err;
 	char	*temp;
-	int		i;
 
-	i = -1;
 	str_err = NULL;
 	temp = NULL;
 	if (ft_isalpha_env(str[0]) != 1024 || ft_avoid_plus(str) == 1 || \
-	ft_faya(str, "/") == 1 || ft_invalid_identifier(str) == 1)
+	ft_faya(str, "/") == 1)
 	{
 		temp = ft_strjoin("bash: export: '", str);
 		str_err = ft_strjoin(temp, "': not a valid identifier\n");

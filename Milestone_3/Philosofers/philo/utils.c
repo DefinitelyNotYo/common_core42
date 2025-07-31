@@ -6,7 +6,7 @@
 /*   By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 15:49:58 by yoherfan          #+#    #+#             */
-/*   Updated: 2025/07/04 18:34:23 by yoherfan         ###   ########.fr       */
+/*   Updated: 2025/07/07 14:56:11 by yoherfan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,16 +63,21 @@ long long	get_time_stamp(void)
 int	check_meals(t_table *table)
 {
 	int	i;
+	int	toggle;
 
 	i = -1;
+	toggle = 0;
 	while (++i < table->n_philos)
 	{
 		pthread_mutex_lock(table->philos[i].mute_max_meals);
 		if (table->philos[i].rules->notepme == -1)
 			return (pthread_mutex_unlock(table->philos[i].mute_max_meals), 0);
-		if (table->philos[i].meals == table->philos[i].rules->notepme)
-			return (pthread_mutex_unlock(table->philos[i].mute_max_meals), 0);
+		if (table->philos[i].meals != table->philos[i].rules->notepme)
+			toggle = 1;
 		pthread_mutex_unlock(table->philos[i].mute_max_meals);
 	}
-	return (1);
+	if (toggle == 1)
+		return (0);
+	else
+		return (1);
 }

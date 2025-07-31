@@ -6,7 +6,7 @@
 /*   By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/07 14:23:28 by yoherfan          #+#    #+#             */
-/*   Updated: 2025/06/23 14:23:40 by yoherfan         ###   ########.fr       */
+/*   Updated: 2025/06/17 15:21:54 by yoherfan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	exec_block_1(t_arg *args, t_parameters *p, int index)
 			}
 			else
 				p->pid_child = id;
-		}
+		}		
 	}
 }
 

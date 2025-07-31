@@ -6,7 +6,7 @@
 /*   By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/25 16:51:42 by yoherfan          #+#    #+#             */
-/*   Updated: 2025/07/04 18:21:40 by yoherfan         ###   ########.fr       */
+/*   Updated: 2025/07/07 16:25:59 by yoherfan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	monitor(t_table *table)
 		}
 		if (check_meals(table) == 1)
 			return ;
+		usleep(10);
 	}
 }
 

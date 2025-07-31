@@ -6,7 +6,7 @@
 /*   By: cciapett <cciapett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/14 11:23:37 by cciapett          #+#    #+#             */
-/*   Updated: 2025/06/23 16:15:54 by cciapett         ###   ########.fr       */
+/*   Updated: 2025/06/14 11:36:31 by cciapett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,22 +18,4 @@ int	ft_isalpha_env(int c)
 		return (1024);
 	else
 		return (0);
-}
-
-int	ft_invalid_identifier(char *str)
-{
-	int	i;
-	int	toggle;
-
-	i = -1;
-	toggle = 0;
-	while (str[++i] != '\0' && toggle == 0)
-	{
-		if (str[i] == '=')
-			toggle = 1;
-		if (ft_isalnum_env(str[i]) == 0 && ft_isdigit(str[i]) == 0 \
-		&& toggle == 0)
-			return (1);
-	}
-	return (0);
 }

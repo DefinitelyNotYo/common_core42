@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cciapett <cciapett@student.42.fr>          +#+  +:+       +#+        */
+/*   By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 17:31:00 by yoherfan          #+#    #+#             */
-/*   Updated: 2025/06/23 16:08:36 by cciapett         ###   ########.fr       */
+/*   Updated: 2025/06/17 17:31:39 by yoherfan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,6 +199,7 @@ int		ft_avoid_plus(char *str);
 int		ft_strcmp(char *s1, char *s2);
 int		ft_order(char ***env_copy);
 void	ft_bubble_sort(char ***env_copy);
+int		ft_isalpha_env(int c);
 void	ft_search_plus(char *str, char ***env_copy, int *index);
 //EXPORT_UTILS2.C
 void	ft_create_value_plus(char ***env_copy, char *str, int pos, int *index);
@@ -206,9 +207,6 @@ void	ft_create_value_eq(char ***env_copy, char *str, int pos, int *index);
 void	ft_copy_str(char *name, char *value, char **env_copy_str);
 void	ft_copy_str2(char *value, char **env_copy_str);
 void	ft_substitute_value(char ***env_copy, char *str, int pos, int *index);
-//EXPORT_UTILS.C
-int		ft_invalid_identifier(char *str);
-int		ft_isalpha_env(int c);;
 //MANAGER.C
 void	parse_manager(t_parameters *p);
 void	clean_manager(char **args);

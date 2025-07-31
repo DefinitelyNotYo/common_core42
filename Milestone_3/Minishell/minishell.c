@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoherfan <yoherfan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cciapett <cciapett@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/03 16:12:04 by yoherfan          #+#    #+#             */
-/*   Updated: 2025/06/23 14:24:24 by yoherfan         ###   ########.fr       */
+/*   Updated: 2025/06/17 14:17:07 by cciapett         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,8 +103,8 @@ int	main(int argc, char **argv, char **env)
 					ft_putstr_fd("bash: syntax error\n", 2);
 					p.dollar = 2;
 					continue ;
-				}
-			}
+				}				
+			}		
 			else
 				continue ;
 			main_exe_4(&p);
